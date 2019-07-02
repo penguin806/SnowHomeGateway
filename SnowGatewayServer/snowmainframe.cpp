@@ -6,6 +6,8 @@ SnowMainFrame::SnowMainFrame(QWidget *parent) :
     ui(new Ui::SnowMainFrame)
 {
     ui->setupUi(this);
+    this->webInterface = new WebInterface(12800, this);
+    this->webInterface->startWebServer();
 }
 
 SnowMainFrame::~SnowMainFrame()
