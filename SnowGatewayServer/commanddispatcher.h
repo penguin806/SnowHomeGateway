@@ -13,7 +13,7 @@ public slots:
     void sendCommandToClients(QString commandString);
 
 private:
-    quint16 clientPort;
+    const quint16 clientPort;
 };
 
 #endif // COMMANDDISPATCHER_H
