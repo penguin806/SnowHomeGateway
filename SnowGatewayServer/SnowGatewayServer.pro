@@ -25,12 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        commanddispatcher.cpp \
         main.cpp \
         snowmainframe.cpp \
         webinterface.cpp \
         webinterface.cpp
 
 HEADERS += \
+        commanddispatcher.h \
         snowmainframe.h \
         webinterface.h \
         webinterface.h
