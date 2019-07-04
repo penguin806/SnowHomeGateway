@@ -21,7 +21,7 @@ void CommandExecutor::executeCommandFromServer(QString commandString)
             throw QString("ERROR_UNKNOWN_COMMAND_TYPE");
         }
 
-        int controlBits = 0x00f; // Binary: 00000000
+        int controlBits = 0x00; // Binary: 00000000
         while (!commandStruct.isCommandBodyEmpty())
         {
             quint8 ledNumber = commandStruct.popIntegerFromCommandBody();
