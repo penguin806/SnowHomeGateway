@@ -8,40 +8,39 @@
 </head>
 <body>
     <div id="controlPanel">
-        <form action="http://localhost:1280/ledControl" method="get">
+        <form id="ledSwitchForm" action="http://localhost:1280/ledControl" method="get">
             <label class="switch">
-                <input name="led1" type="checkbox">
+                <input class="led-switch" name="led1" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led2" type="checkbox">
+                <input class="led-switch" name="led2" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led3" type="checkbox">
+                <input class="led-switch" name="led3" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led4" type="checkbox">
+                <input class="led-switch" name="led4" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led5" type="checkbox">
+                <input class="led-switch" name="led5" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led6" type="checkbox">
+                <input class="led-switch" name="led6" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led7" type="checkbox">
+                <input class="led-switch" name="led7" type="checkbox">
                 <span class="slider round"></span>
             </label>
             <label class="switch">
-                <input name="led8" type="checkbox">
+                <input class="led-switch" name="led8" type="checkbox">
                 <span class="slider round"></span>
             </label>
-
             <!--<button type="submit" id="okButton">OK</button>-->
         </form>
     </div>
@@ -49,9 +48,15 @@
 <script>
     $(document).ready(
         function () {
-            $('#controlPanel').submit(
+            $('#controlPanel .led-switch').change(
                 function () {
-                    //return false;
+                    $.get(
+                        'http://localhost:1280/ledControl',
+                        $('#ledSwitchForm').serialize(),
+                        function (data, status) {
+                            console.log('ledControl', data, status);
+                        }
+                    );
                 }
             );
         }
