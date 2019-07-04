@@ -1,6 +1,11 @@
 #include "commandexecutor.h"
 #include <QDebug>
 
+#ifdef Q_OS_LINUX
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#endif
+
 CommandExecutor::CommandExecutor(QObject *parent) : QObject(parent)
 {
 
@@ -12,17 +17,27 @@ void CommandExecutor::executeCommandFromServer(QString commandString)
         CommandStructure commandStruct = this->parseCommandString(commandString);
         if(commandStruct.getCommandType() != QString("LED"))
         {
-            throw QString("ERROR_UNKOWN_COMMAND_TYPE");
+            throw QString("ERROR_UNKNOWN_COMMAND_TYPE");
         }
 
+        int controlBits = 0x00f; // Binary: 00000000
         while (!commandStruct.isCommandBodyEmpty())
         {
             quint8 ledNumber = commandStruct.popIntegerFromCommandBody();
-            qDebug() << ledNumber;
-#ifdef Q_OS_LINUX
-            // Execute embedded linux (arm based) code here...
-#endif
+            controlBits |= (1 << (ledNumber-1));
+            qDebug() << controlBits;
         }
+
+#ifdef Q_OS_LINUX
+        // Execute code for CVT4418 mathine (arm based embedded linux) here...
+
+        int fileDescriptor = open("/dev/cled_ctl",O_RDWR);
+        if(fileDescriptor == -1)
+        {
+            throw QString("ERROR_OPEN_DEVICE_FAILED");
+        }
+        ioctl(fileDescriptor, 0, controlBits);
+#endif
 
     } catch (QString errorString) {
         qDebug() << errorString;
