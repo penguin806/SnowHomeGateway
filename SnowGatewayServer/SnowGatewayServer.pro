@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,11 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        commanddispatcher.cpp \
         main.cpp \
-        snowmainframe.cpp
+        snowmainframe.cpp \
+        webinterface.cpp \
+        webinterface.cpp
 
 HEADERS += \
-        snowmainframe.h
+        commanddispatcher.h \
+        snowmainframe.h \
+        webinterface.h \
+        webinterface.h
 
 FORMS += \
         snowmainframe.ui

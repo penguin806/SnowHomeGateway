@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SnowHomeGateway-ControlPanel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div id="controlPanel">
+        <form id="ledSwitchForm" action="http://localhost:1280/ledControl" method="get">
+            <label class="switch">
+                <input class="led-switch" name="led1" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led2" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led3" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led4" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led5" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led6" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led7" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">
+                <input class="led-switch" name="led8" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <!--<button type="submit" id="okButton">OK</button>-->
+        </form>
+    </div>
+</body>
+<script>
+    $(document).ready(
+        function () {
+            $('#controlPanel .led-switch').change(
+                function () {
+                    $.get(
+                        'http://localhost:1280/ledControl',
+                        $('#ledSwitchForm').serialize(),
+                        function (data, status) {
+                            console.log('ledControl', data, status);
+                        }
+                    );
+                }
+            );
+        }
+    );
+</script>
+</html>

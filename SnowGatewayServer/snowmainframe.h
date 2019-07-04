@@ -2,6 +2,8 @@
 #define SNOWMAINFRAME_H
 
 #include <QDialog>
+#include "webinterface.h"
+#include "commanddispatcher.h"
 
 namespace Ui {
 class SnowMainFrame;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::SnowMainFrame *ui;
+    WebInterface *webInterface;
+    CommandDispatcher *commandDispatcher;
 };
 
 #endif // SNOWMAINFRAME_H
