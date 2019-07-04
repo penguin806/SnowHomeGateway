@@ -4,6 +4,7 @@
 #ifdef Q_OS_LINUX
 #include <sys/ioctl.h>
 #include <fcntl.h>
+#include <unistd.h>
 #endif
 
 CommandExecutor::CommandExecutor(QObject *parent) : QObject(parent)
@@ -37,6 +38,7 @@ void CommandExecutor::executeCommandFromServer(QString commandString)
             throw QString("ERROR_OPEN_DEVICE_FAILED");
         }
         ioctl(fileDescriptor, 0, controlBits);
+        close(fileDescriptor);
 #endif
 
     } catch (QString errorString) {
