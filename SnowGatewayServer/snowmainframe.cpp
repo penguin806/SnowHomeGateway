@@ -7,8 +7,8 @@ SnowMainFrame::SnowMainFrame(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    const quint8 webInterfaceListenPort = quint8(1280);
-    const quint8 clientsListenPort = quint8(8140);
+    const quint16 webInterfaceListenPort = 1280;
+    const quint16 clientsListenPort = 8140;
     this->webInterface = new WebInterface(webInterfaceListenPort, this);
     this->commandDispatcher = new CommandDispatcher(clientsListenPort, this);
     QObject::connect(this->webInterface, SIGNAL(receivedCommandFromWebInterface(QString)),
